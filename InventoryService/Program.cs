@@ -1,16 +1,22 @@
-using InventoryService.Data;
+using InventoryService.Infrastructure.Data;
+using InventoryService.Infrastructure.Data.Repositories;
+using InventoryService.Application.Services;
 using Microsoft.EntityFrameworkCore;
+using InventoryService.Domain.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddControllers();
 
 // Configuração do PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
@@ -21,6 +27,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthorization();
+app.MapControllers();
+
+app.Run();
 
 var summaries = new[]
 {
@@ -43,7 +53,7 @@ app.MapGet("/weatherforecast", () =>
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+record WeatherForecast(DateOnly Date, int TemperatureC, string Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }

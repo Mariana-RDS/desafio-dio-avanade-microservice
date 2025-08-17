@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\InventoryService\\InventoryService.csproj": {}
+    "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\InventoryService\\InventoryService.csproj": {
+    "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\InventoryService\\InventoryService.csproj",
+        "projectUniqueName": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj",
         "projectName": "InventoryService",
-        "projectPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\InventoryService\\InventoryService.csproj",
+        "projectPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj",
         "packagesPath": "C:\\Users\\mard_\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\InventoryService\\obj\\",
+        "outputPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\InventoryService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mard_\\AppData\\Roaming\\NuGet\\NuGet.Config"

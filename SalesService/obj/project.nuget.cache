@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zfr4cjTkzhk=",
+  "dgSpecHash": "X5rvjepe35c=",
   "success": true,
-  "projectFilePath": "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\SalesService\\SalesService.csproj",
+  "projectFilePath": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\SalesService\\SalesService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mard_\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.8\\microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
     "C:\\Users\\mard_\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"

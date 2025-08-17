@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\SalesService\\SalesService.csproj": {}
+    "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\SalesService\\SalesService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\SalesService\\SalesService.csproj": {
+    "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\SalesService\\SalesService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\SalesService\\SalesService.csproj",
+        "projectUniqueName": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\SalesService\\SalesService.csproj",
         "projectName": "SalesService",
-        "projectPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\SalesService\\SalesService.csproj",
+        "projectPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\SalesService\\SalesService.csproj",
         "packagesPath": "C:\\Users\\mard_\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\SalesService\\obj\\",
+        "outputPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\SalesService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mard_\\AppData\\Roaming\\NuGet\\NuGet.Config"

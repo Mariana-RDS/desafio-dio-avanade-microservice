@@ -5,9 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace InventoryService.Models
+namespace InventoryService.Domain.Entities
 {
-    [Table("products")]
     public class Product
     {
         [Key]
@@ -18,11 +17,18 @@ namespace InventoryService.Models
         [MaxLength(100)]
         public string Name { get; set; }
 
-        [Column(TypeName = "decimal(10,2)")]
+        
         public string Description { get; set; }
 
+        [Column(TypeName = "decimal(10,2)")]
         public decimal Price { get; set; }
 
-        public int StockQuantity { get; set; }
+        private int _stockQuantity;
+        public int StockQuantity
+        {
+            get => _stockQuantity;
+            set => _stockQuantity = value >= 0 ? value :
+                throw new ArgumentException("A quantidade em estoque não pode ser negativa");
+        }
     }
 }

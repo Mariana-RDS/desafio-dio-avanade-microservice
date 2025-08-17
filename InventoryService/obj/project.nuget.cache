@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "E5otN94eM3M=",
+  "dgSpecHash": "3TjpijkEaAA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\InventoryService\\InventoryService.csproj",
+  "projectFilePath": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mard_\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\mard_\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.8\\microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\ApiGateway\\ApiGateway.csproj": {}
+    "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\ApiGateway\\ApiGateway.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\ApiGateway\\ApiGateway.csproj": {
+    "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\ApiGateway\\ApiGateway.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\ApiGateway\\ApiGateway.csproj",
+        "projectUniqueName": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\ApiGateway\\ApiGateway.csproj",
         "projectName": "ApiGateway",
-        "projectPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\ApiGateway\\ApiGateway.csproj",
+        "projectPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\ApiGateway\\ApiGateway.csproj",
         "packagesPath": "C:\\Users\\mard_\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\MICROSERVICE\\ApiGateway\\obj\\",
+        "outputPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\ApiGateway\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mard_\\AppData\\Roaming\\NuGet\\NuGet.Config"
