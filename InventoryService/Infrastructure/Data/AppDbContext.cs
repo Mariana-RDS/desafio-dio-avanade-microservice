@@ -18,12 +18,12 @@ namespace InventoryService.Infrastructure.Data
             modelBuilder.Entity<Product>().HasKey(p => p.Id);
 
             modelBuilder.Entity<Product>(entity =>
-        {
-            entity.Property(p => p.Id).HasColumnName("id");
-            entity.Property(p => p.Name).HasColumnName("name");
-            entity.Property(p => p.Price).HasColumnName("price");
-            entity.Property(p => p.StockQuantity).HasColumnName("stockQuantity");
-        });
+            {
+                entity.Property(p => p.Id).HasColumnName("id");
+                entity.Property(p => p.Name).HasColumnName("name");
+                entity.Property(p => p.Price).HasColumnName("price");
+                entity.Property(p => p.StockQuantity).HasColumnName("stockQuantity");
+            });
         }
     }
 }
