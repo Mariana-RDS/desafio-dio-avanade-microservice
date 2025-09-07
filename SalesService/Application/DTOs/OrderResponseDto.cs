@@ -11,8 +11,7 @@ namespace SalesService.Application.DTOs
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
         public decimal TotalOrder { get; set; }
-        public List<OrderItemResponseDto> Items { get; set; } = new List<OrderItemResponseDto
-        >();
         public OrderStatus Status { get; set; }
+        public List<OrderItemResponseDto> Items { get; set; } = new List<OrderItemResponseDto>();
     }
 }

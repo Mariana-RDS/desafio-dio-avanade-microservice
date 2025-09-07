@@ -11,10 +11,10 @@ namespace InventoryService.Application.DTOs
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [Range(0.01, double.MaxValue, ErrorMessage ="O preço em estoque não pode ser negativo")]
+        [Range(0.01, double.MaxValue, ErrorMessage ="The stock price cannot be negative")]
         public decimal? Price { get; set; }
         
-        [Range(0, int.MaxValue, ErrorMessage = "A quantidade em estoque não pode ser negativa")]
+        [Range(0, int.MaxValue, ErrorMessage = "The quantity in stock cannot be negative")]
         public int? StockQuantity { get; set; }
     }
 }

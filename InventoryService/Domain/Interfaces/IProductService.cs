@@ -9,10 +9,11 @@ namespace InventoryService.Domain.Interfaces
 {
     public interface IProductService
     {
-        Task<ProductResponseDto>  GetByIdAsync(int id);
+        Task<ProductResponseDto> GetByIdAsync(int id);
         Task<IEnumerable<ProductResponseDto>> GetAllAsync();
-        Task<ProductResponseDto> AddAsync(ProductCreateDto  productDto);
-        Task<ProductResponseDto> UpdateAsync(int id, ProductUpdateDto  productDto);
+        Task<ProductResponseDto> AddAsync(ProductCreateDto productDto);
+        Task<ProductResponseDto> UpdateAsync(int id, ProductUpdateDto productDto);
         Task<bool> DeleteAsync(int id);
+        Task<ProductResponseDto> UpdateStockAsync(int productId, int quantityChange);
     }
 }

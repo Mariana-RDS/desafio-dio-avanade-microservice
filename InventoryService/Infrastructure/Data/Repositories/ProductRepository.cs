@@ -20,12 +20,18 @@ namespace InventoryService.Infrastructure.Data.Repositories
 
         public async Task<Product> GetByIdAsync(int id)
         {
-            return await _context.Products.FindAsync(id);  
+            return await _context.Products.FindAsync(id);
         }
 
         public async Task AddAsync(Product product)
         {
             await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(Product product)
+        {
+            _context.Entry(product).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 

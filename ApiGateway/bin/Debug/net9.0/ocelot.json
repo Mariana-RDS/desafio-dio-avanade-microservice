@@ -1,0 +1,87 @@
+{
+    "Routes": [
+        
+        {
+            "DownstreamPathTemplate": "/api/orders",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5141
+                }
+            ],
+            "UpstreamPathTemplate": "/api/orders",
+            "UpstreamHttpMethod": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/orders/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5141
+                }
+            ],
+            "UpstreamPathTemplate": "/api/orders/{id}",
+            "UpstreamHttpMethod": [
+                "GET",
+                "PUT",
+                "DELETE"
+            ]
+        },
+        
+        {
+            "DownstreamPathTemplate": "/api/products",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5085
+                }
+            ],
+            "UpstreamPathTemplate": "/api/products",
+            "UpstreamHttpMethod": [
+                "GET",
+                "POST"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/products/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5085
+                }
+            ],
+            "UpstreamPathTemplate": "/api/products/{id}",
+            "UpstreamHttpMethod": [
+                "GET",
+                "PUT",
+                "DELETE"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/api/products/{id}/stock",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5085
+                }
+            ],
+            "UpstreamPathTemplate": "/api/products/{id}/stock",
+            "UpstreamHttpMethod": [
+                "PATCH"
+            ]
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "http://localhost:5008" 
+    }
+}

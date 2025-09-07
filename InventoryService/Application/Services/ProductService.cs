@@ -68,10 +68,10 @@ namespace InventoryService.Application.Services
             try
             {
                 if (dto.StockQuantity < 0)
-                    throw new ArgumentException("A quantidade em estoque não pode ser negativa");
+                    throw new ArgumentException("The quantity in stock cannot be negative");
 
-                if(dto.Price < 0)
-                    throw new ArgumentException("O preço em estoque não pode ser negativo");
+                if (dto.Price < 0)
+                    throw new ArgumentException("The stock price cannot be negative");
 
                 var product = new Product
                 {
@@ -117,7 +117,7 @@ namespace InventoryService.Application.Services
                     Price = updatedProduct.Price,
                     StockQuantity = updatedProduct.StockQuantity
                 };
-                
+
             }
             catch (Exception exception)
             {
@@ -139,6 +139,33 @@ namespace InventoryService.Application.Services
             catch (Exception exception)
             {
                 _logger.LogError(exception, $"Error deleting product with ID {id}");
+                throw;
+            }
+        }
+
+        public async Task<ProductResponseDto> UpdateStockAsync(int productId, int quantityChange)
+        {
+            try
+            {
+                var product = await _repository.GetByIdAsync(productId);
+                if (product == null)
+                    throw new KeyNotFoundException($"Product {productId} not found");
+
+                product.StockQuantity += quantityChange;
+
+                await _repository.UpdateAsync(product); 
+
+                return new ProductResponseDto
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Price = product.Price,
+                    StockQuantity = product.StockQuantity
+                };
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, $"Error updating stock of product {productId}");
                 throw;
             }
         }

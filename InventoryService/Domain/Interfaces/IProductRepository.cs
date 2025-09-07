@@ -11,6 +11,7 @@ namespace InventoryService.Domain.Interfaces
         Task<Product> GetByIdAsync(int id);
         Task AddAsync(Product product);
         Task<List<Product>> GetAllAsync();
+        Task UpdateAsync(Product product);
         Task UpdateAsync(int id, string name, decimal? price, int? StockQuantity);
         Task DeleteAsync(Product product);
     }

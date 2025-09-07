@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace InventoryService.Presentation.Controllers
 {
+    [ApiController]
     [Route("api/products")]
     public class ProductController : Controller
     {
@@ -136,6 +137,46 @@ namespace InventoryService.Presentation.Controllers
                 _logger.LogError(exception, $"Error deleting product {id}");
                 return StatusCode(500, "Internal server error");
             }
+        }
+
+
+
+
+
+        [HttpGet("{id}/stock/validate")]
+        public async Task<IActionResult> ValidateStock(int id, [FromQuery] int quantity)
+        {
+            var product = await _productService.GetByIdAsync(id);
+            if (product == null) return NotFound();
+
+            return Ok(product.StockQuantity >= quantity);
+        }
+
+        [HttpPatch("{id}/stock")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdateStock(int id, [FromBody] StockUpdateDto dto)
+        {
+            try
+            {
+                await _productService.UpdateStockAsync(id, dto.QuantityChange);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                _logger.LogWarning(ex, $"Product {id} not found");
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error updating stock of product {id}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        public class StockUpdateDto
+        {
+            public int QuantityChange { get; set; }
         }
     }
 }

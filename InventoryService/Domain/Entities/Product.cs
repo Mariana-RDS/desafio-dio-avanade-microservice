@@ -28,7 +28,7 @@ namespace InventoryService.Domain.Entities
         {
             get => _stockQuantity;
             set => _stockQuantity = value >= 0 ? value :
-                throw new ArgumentException("A quantidade em estoque não pode ser negativa");
+                throw new ArgumentException("The quantity in stock cannot be negative");
         }
     }
 }
