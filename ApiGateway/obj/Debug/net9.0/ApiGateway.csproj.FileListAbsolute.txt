@@ -42,3 +42,11 @@ C:\Users\mard_\OneDrive\Documentos\desafio-dio-avanade-microservice\ApiGateway\o
 C:\Users\mard_\OneDrive\Documentos\desafio-dio-avanade-microservice\ApiGateway\obj\Debug\net9.0\ApiGateway.pdb
 C:\Users\mard_\OneDrive\Documentos\desafio-dio-avanade-microservice\ApiGateway\obj\Debug\net9.0\ApiGateway.genruntimeconfig.cache
 C:\Users\mard_\OneDrive\Documentos\desafio-dio-avanade-microservice\ApiGateway\obj\Debug\net9.0\ref\ApiGateway.dll
+C:\Users\mard_\OneDrive\Documentos\desafio-dio-avanade-microservice\ApiGateway\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\mard_\OneDrive\Documentos\desafio-dio-avanade-microservice\ApiGateway\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\mard_\OneDrive\Documentos\desafio-dio-avanade-microservice\ApiGateway\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\mard_\OneDrive\Documentos\desafio-dio-avanade-microservice\ApiGateway\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\mard_\OneDrive\Documentos\desafio-dio-avanade-microservice\ApiGateway\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\mard_\OneDrive\Documentos\desafio-dio-avanade-microservice\ApiGateway\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\mard_\OneDrive\Documentos\desafio-dio-avanade-microservice\ApiGateway\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\mard_\OneDrive\Documentos\desafio-dio-avanade-microservice\ApiGateway\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll

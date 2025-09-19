@@ -1,6 +1,18 @@
 {
     "Routes": [
-        
+
+        {
+            "DownstreamPathTemplate": "/api/auth/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                "Host": "localhost",
+                "Port": 5161
+                }
+            ],
+            "UpstreamPathTemplate": "/api/auth/{everything}",
+            "UpstreamHttpMethod": [ "GET", "POST" ]
+        },
         {
             "DownstreamPathTemplate": "/api/orders",
             "DownstreamScheme": "http",
