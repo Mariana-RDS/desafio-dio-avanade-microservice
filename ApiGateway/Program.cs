@@ -6,7 +6,30 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSecret"] ?? "DefaultSecretKeyAtLeast32CharactersLong!");
+var jwtSecret = builder.Configuration["JwtSecret"];
+
+if (string.IsNullOrEmpty(jwtSecret) || jwtSecret.Length < 32)
+{
+    if (File.Exists("jwt-secret.txt"))
+    {
+        jwtSecret = File.ReadAllText("jwt-secret.txt");
+        Console.WriteLine($"JWT Secret lido do arquivo: {jwtSecret}");
+    }
+    else
+    {
+        var randomBytes = new byte[32];
+        using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(randomBytes);
+        }
+        jwtSecret = Convert.ToBase64String(randomBytes);
+        Console.WriteLine($"JWT Secret gerado no Gateway: {jwtSecret}");
+    }
+    
+    builder.Configuration["JwtSecret"] = jwtSecret;
+}
+
+var key = Encoding.ASCII.GetBytes(jwtSecret);
 
 builder.Services.AddAuthentication(options =>
 {
@@ -21,7 +44,8 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(key),
         ValidateIssuer = false,
         ValidateAudience = false,
-        ValidateLifetime = true
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
     };
 });
 
@@ -47,7 +71,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-app.UseCors("AllowAll");
+app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 await app.UseOcelot();

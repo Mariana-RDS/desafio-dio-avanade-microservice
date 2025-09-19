@@ -1,24 +1,40 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-
 using System.Text;
-using UserService;
-using UserService.Application.Service;
 using UserService.Domain;
 using UserService.Infrastructure.Data.Repositories;
+using UserService.Application.Service;
+using UserService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("UserDatabase")));
-    
+
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-// JWT Configuration
-var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSecret"]);
+var jwtSecret = builder.Configuration["JwtSecret"];
+
+if (string.IsNullOrEmpty(jwtSecret) || jwtSecret.Length < 32)
+{
+    var randomBytes = new byte[32];
+    using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
+    {
+        rng.GetBytes(randomBytes);
+    }
+    jwtSecret = Convert.ToBase64String(randomBytes);
+    
+    Console.WriteLine($"JWT Secret gerado: {jwtSecret}");
+    builder.Configuration["JwtSecret"] = jwtSecret;
+    
+    File.WriteAllText("jwt-secret.txt", jwtSecret);
+}
+
+var key = Encoding.ASCII.GetBytes(jwtSecret);
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -28,9 +44,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(key),
             ValidateIssuer = false,
             ValidateAudience = false,
-            ValidateLifetime = true
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero
         };
+        
     });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => 
+        policy.RequireRole("Admin"));
+    
+    options.AddPolicy("UserOnly", policy => 
+        policy.RequireRole("User"));
+});
+
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 var app = builder.Build();
 
