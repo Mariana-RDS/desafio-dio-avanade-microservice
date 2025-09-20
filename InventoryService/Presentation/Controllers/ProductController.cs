@@ -7,6 +7,7 @@ using InventoryService.Application.DTOs;
 using InventoryService.Application.Services;
 using InventoryService.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 
@@ -14,6 +15,7 @@ namespace InventoryService.Presentation.Controllers
 {
     [ApiController]
     [Route("api/products")]
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly ILogger<ProductController> _logger;
@@ -26,6 +28,7 @@ namespace InventoryService.Presentation.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(ProductResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)
@@ -48,6 +51,7 @@ namespace InventoryService.Presentation.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(IEnumerable<ProductResponseDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll()
         {
@@ -65,6 +69,7 @@ namespace InventoryService.Presentation.Controllers
 
         [HttpPost]
         [Route("create")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(ProductResponseDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromBody] ProductCreateDto dto)
@@ -90,6 +95,7 @@ namespace InventoryService.Presentation.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(ProductResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -119,6 +125,7 @@ namespace InventoryService.Presentation.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
@@ -144,6 +151,7 @@ namespace InventoryService.Presentation.Controllers
 
 
         [HttpGet("{id}/stock/validate")]
+        [AllowAnonymous]
         public async Task<IActionResult> ValidateStock(int id, [FromQuery] int quantity)
         {
             var product = await _productService.GetByIdAsync(id);
@@ -153,6 +161,7 @@ namespace InventoryService.Presentation.Controllers
         }
 
         [HttpPatch("{id}/stock")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateStock(int id, [FromBody] StockUpdateDto dto)

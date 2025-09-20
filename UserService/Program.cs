@@ -26,10 +26,10 @@ if (string.IsNullOrEmpty(jwtSecret) || jwtSecret.Length < 32)
         rng.GetBytes(randomBytes);
     }
     jwtSecret = Convert.ToBase64String(randomBytes);
-    
+
     Console.WriteLine($"JWT Secret gerado: {jwtSecret}");
     builder.Configuration["JwtSecret"] = jwtSecret;
-    
+
     File.WriteAllText("jwt-secret.txt", jwtSecret);
 }
 
@@ -47,15 +47,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true,
             ClockSkew = TimeSpan.Zero
         };
-        
+
     });
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("AdminOnly", policy => 
+    options.AddPolicy("AdminOnly", policy =>
         policy.RequireRole("Admin"));
-    
-    options.AddPolicy("UserOnly", policy => 
+
+    options.AddPolicy("UserOnly", policy =>
         policy.RequireRole("User"));
 });
 

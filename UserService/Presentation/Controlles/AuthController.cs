@@ -1,4 +1,6 @@
 
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UserService.Application;
 using UserService.Domain;
@@ -17,6 +19,7 @@ namespace UserService.Presentation.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public IActionResult Login([FromBody] LoginRequest request)
         {
             var user = _authService.Authenticate(request.Username, request.Password);
@@ -32,6 +35,7 @@ namespace UserService.Presentation.Controllers
         }
 
         [HttpPost("register")]
+        [AllowAnonymous]
         public IActionResult Register([FromBody] RegisterUserRequest register)
         {
             var result = _authService.Register(register);
@@ -40,5 +44,6 @@ namespace UserService.Presentation.Controllers
 
             return Ok(new { Message = result.Message });
         }
+
     }
 }

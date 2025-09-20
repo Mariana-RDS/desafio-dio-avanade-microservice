@@ -57,7 +57,9 @@ builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
     .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
 
-builder.Services.AddOcelot();
+builder.Services.AddOcelot()
+    .AddDelegatingHandler<ForwardAuthorizationHeaderHandler>();
+builder.Services.AddTransient<ForwardAuthorizationHeaderHandler>();
 
 builder.Services.AddCors(options =>
 {
@@ -71,9 +73,27 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-app.UseCors("AllowFrontend");
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 await app.UseOcelot();
 
 app.Run();
+
+
+
+public class ForwardAuthorizationHeaderHandler : DelegatingHandler
+{
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request, 
+        CancellationToken cancellationToken)
+    {
+        if (request.Headers.TryGetValues("Authorization", out var values))
+        {
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(
+                values.First().Replace("Bearer ", ""));
+        }
+
+        return await base.SendAsync(request, cancellationToken);
+    }
+}

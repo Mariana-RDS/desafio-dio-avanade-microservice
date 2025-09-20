@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SalesService.Application.DTOs;
 using SalesService.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SalesService.Presentation.Controllers
 {
     [ApiController]
     [Route("api/orders")]
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly ILogger<OrdersController> _logger;
@@ -25,6 +27,7 @@ namespace SalesService.Presentation.Controllers
 
         [HttpPost]
         [Route("create")]
+        [Authorize(Roles = "User,Admin")]
         [ProducesResponseType(typeof(OrderResponseDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateOrder([FromBody] OrderCreateDto orderDto)
@@ -49,6 +52,7 @@ namespace SalesService.Presentation.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "User,Admin")]
         [ProducesResponseType(typeof(OrderResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetOrder(int id)
@@ -58,6 +62,7 @@ namespace SalesService.Presentation.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(List<OrderResponseDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllOrders()
         {

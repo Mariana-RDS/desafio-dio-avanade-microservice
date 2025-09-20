@@ -1,28 +1,15 @@
 {
     "Routes": [
-
         {
             "DownstreamPathTemplate": "/api/auth/{everything}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
-                "Host": "localhost",
-                "Port": 5161
+                    "Host": "localhost",
+                    "Port": 5161
                 }
             ],
             "UpstreamPathTemplate": "/api/auth/{everything}",
-            "UpstreamHttpMethod": [ "GET", "POST" ]
-        },
-        {
-            "DownstreamPathTemplate": "/api/orders",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 5141
-                }
-            ],
-            "UpstreamPathTemplate": "/api/orders",
             "UpstreamHttpMethod": [
                 "GET",
                 "POST",
@@ -31,7 +18,7 @@
             ]
         },
         {
-            "DownstreamPathTemplate": "/api/orders/{id}",
+            "DownstreamPathTemplate": "/api/orders/{everything}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
@@ -39,47 +26,16 @@
                     "Port": 5141
                 }
             ],
-            "UpstreamPathTemplate": "/api/orders/{id}",
+            "UpstreamPathTemplate": "/api/orders/{everything}",
             "UpstreamHttpMethod": [
                 "GET",
-                "PUT",
-                "DELETE"
-            ]
-        },
-        
-        {
-            "DownstreamPathTemplate": "/api/products",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 5085
-                }
-            ],
-            "UpstreamPathTemplate": "/api/products",
-            "UpstreamHttpMethod": [
-                "GET",
-                "POST"
-            ]
-        },
-        {
-            "DownstreamPathTemplate": "/api/products/{id}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 5085
-                }
-            ],
-            "UpstreamPathTemplate": "/api/products/{id}",
-            "UpstreamHttpMethod": [
-                "GET",
+                "POST",
                 "PUT",
                 "DELETE"
             ]
         },
         {
-            "DownstreamPathTemplate": "/api/products/{id}/stock",
+            "DownstreamPathTemplate": "/api/products/{everything}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
@@ -87,13 +43,17 @@
                     "Port": 5085
                 }
             ],
-            "UpstreamPathTemplate": "/api/products/{id}/stock",
+            "UpstreamPathTemplate": "/api/products/{everything}",
             "UpstreamHttpMethod": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
                 "PATCH"
             ]
         }
     ],
     "GlobalConfiguration": {
-        "BaseUrl": "http://localhost:5008" 
+        "BaseUrl": "http://localhost:5008"
     }
 }

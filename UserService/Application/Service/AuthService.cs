@@ -100,16 +100,22 @@ namespace UserService.Application.Service
             if (_userRepository.GetByUsername(register.Username) != null)
                 return (false, "Username already exists");
 
+            var validRoles = new[] { "User", "Admin" };
+            var role = string.IsNullOrEmpty(register.Role) ? "User" : register.Role;
+
+            if (!validRoles.Contains(role))
+                return (false, "Invalid role. Use 'User' or 'Admin'");
+
             var user = new User
             {
                 Username = register.Username,
                 Email = register.Email,
                 PasswordHash = BC.HashPassword(register.Password),
-                Role = "User"
+                Role = role
             };
 
             _userRepository.Add(user);
-            return (true, "User registered successfully");
+            return (true, $"User with role '{role}' registered successfully");
         }
     }
 }
