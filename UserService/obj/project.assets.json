@@ -3244,11 +3244,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\UserService\\UserService.csproj",
+      "projectUniqueName": "C:\\Users\\mard_\\OneDrive\\Área de Trabalho\\Nova pasta\\desafio-dio-avanade-microservice\\UserService\\UserService.csproj",
       "projectName": "UserService",
-      "projectPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\UserService\\UserService.csproj",
+      "projectPath": "C:\\Users\\mard_\\OneDrive\\Área de Trabalho\\Nova pasta\\desafio-dio-avanade-microservice\\UserService\\UserService.csproj",
       "packagesPath": "C:\\Users\\mard_\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\UserService\\obj\\",
+      "outputPath": "C:\\Users\\mard_\\OneDrive\\Área de Trabalho\\Nova pasta\\desafio-dio-avanade-microservice\\UserService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mard_\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -3337,7 +3337,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

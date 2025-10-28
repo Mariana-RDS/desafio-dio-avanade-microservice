@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj": {}
+    "C:\\Users\\mard_\\OneDrive\\Área de Trabalho\\Nova pasta\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj": {
+    "C:\\Users\\mard_\\OneDrive\\Área de Trabalho\\Nova pasta\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj",
+        "projectUniqueName": "C:\\Users\\mard_\\OneDrive\\Área de Trabalho\\Nova pasta\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj",
         "projectName": "InventoryService",
-        "projectPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj",
+        "projectPath": "C:\\Users\\mard_\\OneDrive\\Área de Trabalho\\Nova pasta\\desafio-dio-avanade-microservice\\InventoryService\\InventoryService.csproj",
         "packagesPath": "C:\\Users\\mard_\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mard_\\OneDrive\\Documentos\\desafio-dio-avanade-microservice\\InventoryService\\obj\\",
+        "outputPath": "C:\\Users\\mard_\\OneDrive\\Área de Trabalho\\Nova pasta\\desafio-dio-avanade-microservice\\InventoryService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mard_\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -44,6 +44,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.8, )"
@@ -78,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
