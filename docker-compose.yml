@@ -3,7 +3,7 @@ services:
 # DATABASES
     #Postgres UserService
     userservice-db:
-        image: postgres:15-alpine
+        image: postgres:15
         container_name: userservice-db
         environment:
             POSTGRES_USER: postgres
@@ -23,7 +23,7 @@ services:
 
     #Postgres InventoryService
     inventoryservice-db:
-        image: postgres:15-alpine
+        image: postgres:15
         container_name: inventoryservice-db
         environment:
             POSTGRES_USER: postgres
@@ -43,14 +43,14 @@ services:
     
     #Postgres SalesService
     salesservice-db:
-        image: postgres:15-alpine
+        image: postgres:15
         container_name: salesservice-db
         environment:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
             POSTGRES_DB: sales_db
         ports:
-            - "5443:8080"
+            - "5443:5432"
         volumes:
             - salesservice-data:/var/lib/postgresql/data
         networks:
@@ -66,11 +66,15 @@ services:
     userservice:
         build:
             context: ./UserService
+            dockerfile: Dockerfile
+        user: root
         container_name: userservice-app
         ports:
-            - "5161:8080"
+            - "5161:5161"
         environment:
+            - JwtSecret=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
             - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:5161
             - ConnectionStrings__UserServiceDB=Host=userservice-db;Port=5432;Database=users;Username=postgres;Password=postgres
         depends_on:
             userservice-db:
@@ -83,11 +87,15 @@ services:
     inventoryservice:
         build:
             context: ./InventoryService
+            dockerfile: Dockerfile
+        user: root
         container_name: inventoryservice-app
         ports:
-            - "5085:8080"
+            - "5085:5085"
         environment:
+            - JwtSecret=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
             - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:5085
             - ConnectionStrings__InventoryServiceDB=Host=inventoryservice-db;Port=5432;Database=inventory_db;Username=postgres;Password=postgres
         depends_on:
             inventoryservice-db:
@@ -100,11 +108,15 @@ services:
     salesservice:
         build:
             context: ./SalesService
+            dockerfile: Dockerfile
+        user: root
         container_name: salesservice-app
         ports:
-            - "5141:8080"
+            - "5141:5141"
         environment:
+            - JwtSecret=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
             - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:5141
             - ConnectionStrings__SalesServiceDB=Host=salesservice-db;Port=5432;Database=sales_db;Username=postgres;Password=postgres
         depends_on:
             salesservice-db:
@@ -118,15 +130,21 @@ services:
         build:
             context: ./ApiGateway
             dockerfile: Dockerfile
+        user: root
         container_name: apigateway-app
         ports:
-            - "5008:8080"
+            - "5008:5008"
         environment:
+            - JwtSecret=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
             - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:5008
         depends_on:
-            - userservice
-            - inventoryservice
-            - salesservice
+            userservice:
+                condition: service_started
+            inventoryservice:
+                condition: service_started
+            salesservice:
+                condition: service_started
         networks:
             - microservices-network
         restart: unless-stopped

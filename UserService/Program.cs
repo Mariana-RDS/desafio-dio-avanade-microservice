@@ -63,6 +63,21 @@ builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        context.Database.Migrate();
+        Console.WriteLine("Banco de dados verificado/migrado com sucesso!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Erro ao migrar o banco: {ex.Message}");
+    }
+}
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

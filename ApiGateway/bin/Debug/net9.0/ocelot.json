@@ -1,59 +1,45 @@
 {
-    "Routes": [
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
         {
-            "DownstreamPathTemplate": "/api/auth/{everything}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 5161
-                }
-            ],
-            "UpstreamPathTemplate": "/api/auth/{everything}",
-            "UpstreamHttpMethod": [
-                "GET",
-                "POST",
-                "PUT",
-                "DELETE"
-            ]
-        },
-        {
-            "DownstreamPathTemplate": "/api/orders/{everything}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 5141
-                }
-            ],
-            "UpstreamPathTemplate": "/api/orders/{everything}",
-            "UpstreamHttpMethod": [
-                "GET",
-                "POST",
-                "PUT",
-                "DELETE"
-            ]
-        },
-        {
-            "DownstreamPathTemplate": "/api/products/{everything}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 5085
-                }
-            ],
-            "UpstreamPathTemplate": "/api/products/{everything}",
-            "UpstreamHttpMethod": [
-                "GET",
-                "POST",
-                "PUT",
-                "DELETE",
-                "PATCH"
-            ]
+          "Host": "localhost",
+          "Port": 5161
         }
-    ],
-    "GlobalConfiguration": {
-        "BaseUrl": "http://localhost:5008"
+      ],
+      "UpstreamPathTemplate": "/api/auth/{everything}",
+      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    },
+    {
+      "DownstreamPathTemplate": "/api/orders/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5141
+        }
+      ],
+      "UpstreamPathTemplate": "/api/orders/{everything}",
+      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    },
+    {
+      "DownstreamPathTemplate": "/api/products/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5085
+        }
+      ],
+      "UpstreamPathTemplate": "/api/products/{everything}",
+      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      "DangerousAcceptAnyServerCertificateValidator": true
     }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5008",
+    "RequestIdKey": "OcelotRequestId"
+  }
 }

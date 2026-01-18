@@ -10,7 +10,13 @@
         }
       ],
       "UpstreamPathTemplate": "/api/auth/{everything}",
-      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/orders/{everything}",
@@ -22,7 +28,17 @@
         }
       ],
       "UpstreamPathTemplate": "/api/orders/{everything}",
-      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/products/{everything}",
@@ -34,7 +50,18 @@
         }
       ],
       "UpstreamPathTemplate": "/api/products/{everything}",
-      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "PATCH",
+        "OPTIONS"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "DangerousAcceptAnyServerCertificateValidator": true
     }
   ],

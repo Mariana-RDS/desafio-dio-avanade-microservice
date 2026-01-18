@@ -19,12 +19,13 @@ namespace UserService
         {
             modelBuilder.Entity<User>(entity =>
             {
+                entity.ToTable("users");
                 entity.HasKey(u => u.Id);
-                entity.Property(u => u.Username).IsRequired().HasMaxLength(50);
-                entity.Property(u => u.Email).IsRequired().HasMaxLength(100);
-                entity.Property(u => u.PasswordHash).IsRequired();
-                entity.Property(u => u.Role).IsRequired().HasMaxLength(20);
-                
+                entity.Property(u => u.Id).HasColumnName("id");
+                entity.Property(u => u.Username).IsRequired().HasMaxLength(50).HasColumnName("username");
+                entity.Property(u => u.Email).IsRequired().HasMaxLength(100).HasColumnName("email");
+                entity.Property(u => u.PasswordHash).IsRequired().HasColumnName("password");
+                entity.Property(u => u.Role).IsRequired().HasMaxLength(20).HasColumnName("role");                
                 entity.HasIndex(u => u.Username).IsUnique();
                 entity.HasIndex(u => u.Email).IsUnique();
             });

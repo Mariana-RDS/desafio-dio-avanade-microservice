@@ -6,6 +6,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ✅ CONFIGURAÇÃO JWT (igual aos outros serviços)
 var jwtSecret = builder.Configuration["JwtSecret"];
 
 if (string.IsNullOrEmpty(jwtSecret) || jwtSecret.Length < 32)
@@ -13,7 +14,7 @@ if (string.IsNullOrEmpty(jwtSecret) || jwtSecret.Length < 32)
     if (File.Exists("jwt-secret.txt"))
     {
         jwtSecret = File.ReadAllText("jwt-secret.txt");
-        Console.WriteLine($"JWT Secret lido do arquivo: {jwtSecret}");
+        Console.WriteLine($"JWT Secret lido do arquivo no Gateway: {jwtSecret}");
     }
     else
     {
@@ -23,7 +24,7 @@ if (string.IsNullOrEmpty(jwtSecret) || jwtSecret.Length < 32)
             rng.GetBytes(randomBytes);
         }
         jwtSecret = Convert.ToBase64String(randomBytes);
-        Console.WriteLine($"JWT Secret gerado no Gateway: {jwtSecret}");
+        File.WriteAllText("jwt-secret.txt", jwtSecret);
     }
     
     builder.Configuration["JwtSecret"] = jwtSecret;
@@ -31,69 +32,47 @@ if (string.IsNullOrEmpty(jwtSecret) || jwtSecret.Length < 32)
 
 var key = Encoding.ASCII.GetBytes(jwtSecret);
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer("Bearer",options =>
     {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = false,
-        ValidateAudience = false,
-        ValidateLifetime = true,
-        ClockSkew = TimeSpan.Zero
-    };
-});
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero
+        };
+    });
 
 builder.Services.AddAuthorization();
 
-builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
-    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+// ✅ CONFIGURAÇÃO DO OCELOT COM CORS
+builder.Configuration
     .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
 
-builder.Services.AddOcelot()
-    .AddDelegatingHandler<ForwardAuthorizationHeaderHandler>();
-builder.Services.AddTransient<ForwardAuthorizationHeaderHandler>();
+builder.Services.AddOcelot();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend",
-        policy => policy
-            .WithOrigins("http://localhost:3000")
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials());
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
 });
 
 var app = builder.Build();
 
-app.UseCors("AllowAll");
+app.UseCors("AllowFrontend");
+
+
 app.UseAuthentication();
 app.UseAuthorization();
 await app.UseOcelot();
 
 app.Run();
-
-
-
-public class ForwardAuthorizationHeaderHandler : DelegatingHandler
-{
-    protected override async Task<HttpResponseMessage> SendAsync(
-        HttpRequestMessage request, 
-        CancellationToken cancellationToken)
-    {
-        if (request.Headers.TryGetValues("Authorization", out var values))
-        {
-            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(
-                values.First().Replace("Bearer ", ""));
-        }
-
-        return await base.SendAsync(request, cancellationToken);
-    }
-}

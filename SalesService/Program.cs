@@ -16,6 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IInventoryServiceClient, InventoryServiceClient>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddHttpClient<IInventoryServiceClient, InventoryServiceClient>(client =>
 {
@@ -85,6 +86,21 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        context.Database.Migrate();
+        Console.WriteLine("Banco de dados verificado/migrado com sucesso!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Erro ao migrar o banco: {ex.Message}");
+    }
+}
 
 app.UseCors("AllowFrontend");
 

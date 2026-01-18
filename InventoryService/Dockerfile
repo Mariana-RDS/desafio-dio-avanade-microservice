@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0-alpine AS base
 WORKDIR /app
 
 USER app
-EXPOSE 8080
+EXPOSE 5085
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine AS build
 WORKDIR /src

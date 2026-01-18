@@ -31,7 +31,7 @@ if (string.IsNullOrEmpty(jwtSecret) || jwtSecret.Length < 32)
     if (File.Exists("jwt-secret.txt"))
     {
         jwtSecret = File.ReadAllText("jwt-secret.txt");
-        Console.WriteLine($"✅ JWT Secret lido do arquivo: {jwtSecret}");
+        Console.WriteLine($"JWT Secret lido do arquivo: {jwtSecret}");
     }
     else
     {
@@ -66,6 +66,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        context.Database.Migrate();
+        Console.WriteLine("Banco de dados verificado/migrado com sucesso!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Erro ao migrar o banco: {ex.Message}");
+    }
+}
 
 if (app.Environment.IsDevelopment())
 {
