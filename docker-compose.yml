@@ -148,6 +148,22 @@ services:
         networks:
             - microservices-network
         restart: unless-stopped
+        
+    
+    #Frontend
+    frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        user: root
+        container_name: frontend
+        ports:
+            - "5173:80"
+        networks:
+            - microservices-network
+        depends_on:
+            - apigateway
+        restart: unless-stopped
     
 volumes:
     userservice-data:
