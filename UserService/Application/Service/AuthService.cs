@@ -111,11 +111,24 @@ namespace UserService.Application.Service
                 Username = register.Username,
                 Email = register.Email,
                 PasswordHash = BC.HashPassword(register.Password),
-                Role = role
+                Role = string.IsNullOrEmpty(register.Role) ? "User" : register.Role
             };
 
             _userRepository.Add(user);
             return (true, $"User with role '{role}' registered successfully");
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            var users = _userRepository.GetAll();
+
+            return users.Select(u => new User
+            {
+                Id = u.Id,
+                Username = u.Username,
+                Email = u.Email,
+                Role = u.Role
+            });
         }
     }
 }

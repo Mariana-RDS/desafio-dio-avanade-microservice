@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UserService.Domain.Entities;
 using UserService.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace UserService.Infrastructure.Data.Repositories
 {
@@ -30,6 +31,11 @@ namespace UserService.Infrastructure.Data.Repositories
         public User GetById(int id)
         {
             return _context.Users.Find(id);
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return _context.Users.AsNoTracking().ToList();
         }
     }
 }

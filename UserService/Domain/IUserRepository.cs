@@ -11,6 +11,7 @@ namespace UserService.Domain
         User GetByUsername(string username);
         void Add(User user);
         User GetById(int id);
+        IEnumerable<User> GetAll();
     }
 }
 

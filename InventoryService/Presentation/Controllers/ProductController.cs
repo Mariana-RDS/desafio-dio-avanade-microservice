@@ -95,7 +95,7 @@ namespace InventoryService.Presentation.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "User,Admin")]
         [ProducesResponseType(typeof(ProductResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -146,10 +146,6 @@ namespace InventoryService.Presentation.Controllers
             }
         }
 
-
-
-
-
         [HttpGet("{id}/stock/validate")]
         [AllowAnonymous]
         public async Task<IActionResult> ValidateStock(int id, [FromQuery] int quantity)
@@ -161,7 +157,7 @@ namespace InventoryService.Presentation.Controllers
         }
 
         [HttpPatch("{id}/stock")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "User,Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateStock(int id, [FromBody] StockUpdateDto dto)

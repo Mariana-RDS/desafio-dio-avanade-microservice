@@ -14,5 +14,7 @@ namespace UserService.Domain
         User Authenticate(string username, string password);
         string GenerateJwtToken(User user);
         (bool Success, string Message) Register(RegisterUserRequest register);
+        
+        IEnumerable<User> GetAll();
     }
 }

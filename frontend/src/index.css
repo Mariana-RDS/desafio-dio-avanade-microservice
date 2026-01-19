@@ -1,0 +1,77 @@
+:root {
+  /* Definição da Paleta de Cores */
+  --purple-primary: #8e3f65;
+  --purple-dark: #733352;
+  --slate-text: #73738d;
+  --blue-accent: #72a5ae;
+  --mint-glow: #98e9d0;
+  --mint-light: #f4fffb; /* Um fundo ainda mais suave que o lightMint anterior */
+  --white: #ffffff;
+
+  /* Configurações de Tipografia */
+  font-family: 'Quicksand', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--slate-text);
+  
+  /* Cor de fundo principal do sistema */
+  background-color: #f8faf9; 
+}
+
+body {
+  margin: 0;
+  display: block;
+  min-width: 100vw;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reset de Box-Sizing e Margens */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilização de Títulos */
+h1, h2, h3, h4 {
+  font-family: 'Quicksand', serif; /* Ou a fonte serifada de sua preferência se importada */
+  color: var(--purple-primary);
+  margin-bottom: 1rem;
+}
+
+/* Estilo para Scrollbars (Barra de rolagem) - Opcional, mas dá um toque premium */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--mint-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mint-glow);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--blue-accent);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+input {
+  font-family: inherit;
+  color: var(--slate-text);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
